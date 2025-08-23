@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapiSys - AI-Powered Financial Intelligence Fund</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .hero-section {
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            height: 60px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            color: black;
+            font-weight: 500;
+        }
+        
+        .about-section {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #1e293b, #334155);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            text-align: center;
+            padding: 0 24px;
+        }
+        
+        .about-content h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 48px;
+        }
+        
+        .about-content p {
+            font-size: 18px;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .contact-section {
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+        }
+        
+        .contact-content {
+            max-width: 800px;
+            text-align: center;
+            padding: 0 24px;
+        }
+        
+        .contact-content h2 {
+            font-size: 48px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 48px;
+        }
+        
+        .contact-content p {
+            font-size: 18px;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .contact-email {
+            font-size: 20px;
+            font-weight: 600;
+            color: black;
+        }
+        
+        .contact-email a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        
+        .contact-email a:hover {
+            color: #1d4ed8;
+        }
+        
+        .arrow {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .arrow:hover {
+            transform: translateX(-50%) translateY(-8px);
+        }
+        
+        #squares {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .square {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .green { background: #059669; }
+        .red { background: #dc2626; }
+        
+        @keyframes grow {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <!-- Animated squares -->
+        <div id="squares"></div>
+        
+        <!-- Logo -->
+        <img src="/Users/rick/Downloads/CapiSys Main Logo Transparent bg.svg" alt="CapiSys Logo" class="logo">
+        
+        <!-- Content -->
+        <div class="hero-content">
+            <p>Our goal is to create true financial intelligence, capable of understanding markets and psychology.</p>
+        </div>
+        
+        <!-- Arrow -->
+        <div class="arrow hero-arrow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2"/>
+                <polyline points="8,12 12,16 16,12" stroke="black" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>At CapiSys.</p>
+            <p>We train sophisticated models using Deep Learning and Reinforcement Learning techniques on vast datasets encompassing market data, economic indicators, and financial patterns. Our models are tested and refined in simulated trading environments that replicate real-world market conditions.</p>
+            <p>Through this rigorous training process, we develop autonomous, self-learning financial agents capable of understanding complex market dynamics, adapting to changing conditions, and making intelligent decisions in real-time.</p>
+            <p>Our ultimate vision is to create true financial intelligence that doesn't just process data, but genuinely understands markets at a fundamental level.</p>
+        </div>
+        
+        <!-- White Arrow -->
+        <div class="arrow about-arrow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+                <polyline points="8,12 12,16 16,12" stroke="white" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Contact Us Section -->
+    <section class="contact-section">
+        <div class="contact-content">
+            <h2>Contact Us</h2>
+            <p>For enquiries</p>
+            <p class="contact-email">Contact: <a href="mailto:qa@capisys.com">qa@capisys.com</a></p>
+        </div>
+    </section>
+    
+    <script>
+        const container = document.getElementById('squares');
+        let squares = [];
+        
+        function createSquare() {
+            const square = document.createElement('div');
+            const isGreen = Math.random() > 0.3;
+            square.className = 'square ' + (isGreen ? 'green' : 'red');
+            
+            // Varying opacities
+            const opacity = 0.3 + Math.random() * 0.7; // 0.3 to 1.0
+            square.style.opacity = opacity;
+            
+            square.style.right = Math.random() * 200 + 'px';
+            square.style.top = Math.random() * window.innerHeight + 'px';
+            square.style.animation = 'grow 1s ease-out, float 3s ease-in-out infinite';
+            square.style.animationDelay = Math.random() * 2 + 's';
+            
+            container.appendChild(square);
+            squares.push(square);
+            
+            // Remove after 10 seconds
+            setTimeout(() => {
+                if (square.parentNode) {
+                    square.parentNode.removeChild(square);
+                    squares = squares.filter(s => s !== square);
+                }
+            }, 10000);
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create initial squares
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createSquare, i * 500);
+            }
+            
+            // Keep creating new squares
+            setInterval(createSquare, 1500);
+        });
+        
+        // Arrow click handlers
+        document.querySelector('.hero-arrow').addEventListener('click', () => {
+            document.querySelectorAll('section')[1].scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        document.querySelector('.about-arrow').addEventListener('click', () => {
+            document.querySelectorAll('section')[2].scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
