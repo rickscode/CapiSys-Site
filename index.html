@@ -1,267 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CapiSys</title>
+    <title>CapiSys - Adaptive Intelligence Ventures</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+        :root {
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --bg-primary: #ffffff;
+            --button-bg: #111827;
+            --button-text: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
         }
-        
-        .hero-section {
-            height: 100vh;
-            background: white;
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
+            z-index: 10;
         }
-        
-        .logo {
-            position: absolute;
-            top: 24px;
-            left: 24px;
-            height: 60px;
-        }
-        
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            padding: 0 20px;
-        }
-        
-        .hero-content p {
-            font-size: 18px;
-            color: black;
-            font-weight: 500;
-        }
-        
-        .about-section {
-            min-height: 100vh;
-            background: linear-gradient(to bottom right, #1e293b, #334155);
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 80px 0;
-            position: relative;
-        }
-        
-        .about-content {
-            max-width: 800px;
-            text-align: center;
-            padding: 0 24px;
-        }
-        
-        .about-content h2 {
-            font-size: 48px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 48px;
-        }
-        
-        .about-content p {
-            font-size: 18px;
-            color: white;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-        
-        .contact-section {
-            min-height: 100vh;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 0;
-        }
-        
-        .contact-content {
-            max-width: 800px;
-            text-align: center;
-            padding: 0 24px;
-        }
-        
-        .contact-content h2 {
-            font-size: 48px;
-            font-weight: bold;
-            color: black;
-            margin-bottom: 48px;
-        }
-        
-        .contact-content p {
-            font-size: 18px;
-            color: #374151;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-        
-        .contact-email {
+            gap: 12px;
+            font-weight: 700;
             font-size: 20px;
+        }
+
+        .logo {
+            height: 32px;
+            width: auto;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 40px 0;
+            gap: 40px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3.75rem;
+            /* 60px */
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            /* 20px */
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 480px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 8px;
             font-weight: 600;
-            color: black;
-        }
-        
-        .contact-email a {
-            color: #2563eb;
-            text-decoration: underline;
-        }
-        
-        .contact-email a:hover {
-            color: #1d4ed8;
-        }
-        
-        .arrow {
-            position: absolute;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
+            font-size: 15px;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.2s;
+            text-decoration: none;
         }
-        
-        .arrow:hover {
-            transform: translateX(-50%) translateY(-8px);
+
+        .btn-primary {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid var(--button-bg);
         }
-        
-        #squares {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
+
+        .btn-primary:hover {
+            background-color: #000;
+            transform: translateY(-1px);
         }
-        
-        .square {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid #e5e7eb;
         }
-        
-        .green { background: #059669; }
-        .red { background: #dc2626; }
-        
-        @keyframes grow {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); }
+
+        .btn-outline:hover {
+            border-color: #d1d5db;
+            background-color: #f9fafb;
+            transform: translateY(-1px);
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+
+        /* Canvas Container */
+        #canvas-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+                padding-top: 20px;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+                order: 2;
+                /* Content below globe on mobile if desired, or keep 1 */
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .button-group {
+                justify-content: center;
+            }
+
+            #canvas-container {
+                height: 400px;
+                order: 1;
+            }
         }
     </style>
 </head>
+
 <body>
-    <section class="hero-section">
-        <!-- Animated squares -->
-        <div id="squares"></div>
-        
-        <!-- Logo -->
-        <img src="logo.svg" alt="CapiSys Logo" class="logo">
-        
-        <!-- Content -->
-        <div class="hero-content">
-            <p>From problems to ventures powered by adaptive intelligence</p>
-        </div>
-        
-        <!-- Arrow -->
-        <div class="arrow hero-arrow">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2"/>
-                <polyline points="8,12 12,16 16,12" stroke="black" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
-    </section>
-    
-    <!-- About Us Section -->
-    <section class="about-section">
-        <div class="about-content">
-            <h2>About Us</h2>
-            <p>At Capisys, we are turning AI into a venture engine. We harness AI and frontier technologies across the full lifecycle—research, build, and launch to transform complex problems into adaptive, capital-generating businesses.</p>
-            <p>AI is not just a tool in our process it is our workforce, driving discovery, design, development, and scaling. This model allows us to move quickly from concept to market, creating ventures that adapt, learn, and thrive in dynamic environments.</p>
-            <p>Our portfolio spans both enterprise and consumer markets: from financial systems that enhance trading, risk management, and compliance, to platforms that reimagine how people and organizations connect, transact, and grow.</p>
-            <p>Capisys is building more than technology we are creating a system for continuous venture creation, where AI powers every stage of business building.</p>
-        </div>
-        
-        <!-- White Arrow -->
-        <div class="arrow about-arrow">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
-                <polyline points="8,12 12,16 16,12" stroke="white" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
-    </section>
-    
-    <!-- Contact Us Section -->
-    <section class="contact-section">
-        <div class="contact-content">
-            <h2>Contact Us</h2>
-            <p>For enquiries</p>
-            <p class="contact-email">Contact: <a href="mailto:qa@capisys.com">qa@capisys.com</a></p>
-        </div>
-    </section>
-    
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <!-- Using existing logo.svg -->
+                <img src="logo.svg" alt="CapiSys" class="logo">
+                <!-- <span>CapiSys</span> -->
+            </div>
+            <!-- <nav>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav> -->
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>From problems to ventures powered by adaptive intelligence</h1>
+                <p class="subtitle">
+                    We harness AI and frontier technologies across the full lifecycle research, build, and
+                    launch transforming complex problems into adaptive businesses.
+                </p>
+                <div class="button-group">
+                    <a href="mailto:qa@capisys.com" class="btn btn-primary">Contact Us</a>
+                    <!-- <a href="#about" class="btn btn-outline">Learn More</a> -->
+                </div>
+            </div>
+
+            <div id="canvas-container"></div>
+        </section>
+    </div>
+
     <script>
-        const container = document.getElementById('squares');
-        let squares = [];
-        
-        function createSquare() {
-            const square = document.createElement('div');
-            const isGreen = Math.random() > 0.3;
-            square.className = 'square ' + (isGreen ? 'green' : 'red');
-            
-            // Varying opacities
-            const opacity = 0.3 + Math.random() * 0.7; // 0.3 to 1.0
-            square.style.opacity = opacity;
-            
-            square.style.right = Math.random() * 200 + 'px';
-            square.style.top = Math.random() * window.innerHeight + 'px';
-            square.style.animation = 'grow 1s ease-out, float 3s ease-in-out infinite';
-            square.style.animationDelay = Math.random() * 2 + 's';
-            
-            container.appendChild(square);
-            squares.push(square);
-            
-            // Remove after 10 seconds
-            setTimeout(() => {
-                if (square.parentNode) {
-                    square.parentNode.removeChild(square);
-                    squares = squares.filter(s => s !== square);
-                }
-            }, 10000);
-        }
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // Create initial squares
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createSquare, i * 500);
+        // Three.js Particle Globe Implementation
+        function initGlobe() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // Scene setup
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xffffff); // White background
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera.position.z = 2.5;
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 2000; // Number of dots
+
+            const posArray = new Float32Array(particlesCount * 3);
+
+            // Create sphere distribution
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                // Spherical coordinates
+                const r = 1.3; // Radius
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos((Math.random() * 2) - 1);
+
+                posArray[i] = r * Math.sin(phi) * Math.cos(theta);     // x
+                posArray[i + 1] = r * Math.sin(phi) * Math.sin(theta);   // y
+                posArray[i + 2] = r * Math.cos(phi);                     // z
             }
-            
-            // Keep creating new squares
-            setInterval(createSquare, 1500);
-        });
-        
-        // Arrow click handlers
-        document.querySelector('.hero-arrow').addEventListener('click', () => {
-            document.querySelectorAll('section')[1].scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        document.querySelector('.about-arrow').addEventListener('click', () => {
-            document.querySelectorAll('section')[2].scrollIntoView({ behavior: 'smooth' });
-        });
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            // Material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.015,
+                color: 0x111827, // Dark charcoal color
+                transparent: true,
+                opacity: 0.8,
+            });
+
+            // Mesh
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            // Interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            const windowHalfX = width / 2;
+            const windowHalfY = height / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+            });
+
+            // Animation
+            const clock = new THREE.Clock();
+
+            function animate() {
+                targetX = mouseX * 0.001;
+                targetY = mouseY * 0.001;
+
+                particlesMesh.rotation.y += 0.002; // Auto rotation
+
+                // Gentle interaction movement
+                particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
+                particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
+
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+        }
+
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', initGlobe);
     </script>
 </body>
+
 </html>
