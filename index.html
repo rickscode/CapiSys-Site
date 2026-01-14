@@ -211,7 +211,8 @@
                 <h1>From problems to ventures powered by adaptive intelligence</h1>
                 <p class="subtitle">
                     We harness AI and frontier technologies across the full lifecycle research, build, and
-                    launch transforming complex problems into adaptive businesses.
+                    launch—creating new ventures
+                    and transforming existing businesses through intelligent modernization.
                 </p>
                 <div class="button-group">
                     <a href="mailto:qa@capisys.com" class="btn btn-primary">Contact Us</a>
@@ -345,7 +346,7 @@
                                 )
                             },
                             // Stagger based on distance from center
-                            staggerDelay: Math.sqrt(x*x + y*y + z*z) * ANIMATION_CONFIG.stagger.perUnit
+                            staggerDelay: Math.sqrt(x * x + y * y + z * z) * ANIMATION_CONFIG.stagger.perUnit
                         };
 
                         group.add(cube);
@@ -380,14 +381,14 @@
 
             // HOLD OPEN PHASE - Stay open
             else if (cycleTime >= config.phases.holdOpen.start &&
-                     cycleTime < config.phases.holdOpen.end) {
+                cycleTime < config.phases.holdOpen.end) {
 
                 cube.position.copy(targetPos.expanded);
             }
 
             // REASSEMBLE PHASE - Close
             else if (cycleTime >= config.phases.reassemble.start &&
-                     cycleTime < config.phases.reassemble.end) {
+                cycleTime < config.phases.reassemble.end) {
 
                 const phaseTime = cycleTime - config.phases.reassemble.start - staggerDelay;
                 const t = Math.max(0, Math.min(1, phaseTime / config.phases.reassemble.duration));
