@@ -271,7 +271,8 @@
 
             // Orthographic Camera for isometric view
             const aspect = width / height;
-            const frustumSize = 7.5; // Larger value = smaller cubes on screen
+            const isMobile = width < 968;
+            const frustumSize = isMobile ? 10 : 7.5; // Smaller on mobile to fit in container
             const camera = new THREE.OrthographicCamera(
                 frustumSize * aspect / -2,
                 frustumSize * aspect / 2,
@@ -440,7 +441,8 @@
                 const aspect = width / height;
 
                 // Update orthographic camera frustum
-                const frustumSize = 7.5;
+                const isMobile = width < 968;
+                const frustumSize = isMobile ? 10 : 7.5;
                 camera.left = frustumSize * aspect / -2;
                 camera.right = frustumSize * aspect / 2;
                 camera.top = frustumSize / 2;
