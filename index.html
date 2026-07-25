@@ -5,24 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CapiSys - Adaptive Intelligence Ventures</title>
+    <meta name="description"
+        content="CapiSys is a venture studio building and operating AI-driven companies - from research to launch.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --text-primary: #111827;
             --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
             --bg-primary: #ffffff;
-            --button-bg: #111827;
-            --button-text: #ffffff;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --accent: #225699;
+            --accent-dark: #1a427a;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -33,83 +41,74 @@
             overflow-x: hidden;
         }
 
-        /* Layout */
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         /* Header */
         header {
-            padding: 24px 0;
+            padding: 28px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            font-size: 20px;
         }
 
         .logo {
-            height: 32px;
+            height: 30px;
             width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
         }
 
         nav a {
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-decoration: none;
-            margin-left: 24px;
             font-weight: 500;
             font-size: 15px;
             transition: color 0.2s;
         }
 
         nav a:hover {
-            color: var(--text-secondary);
-        }
-
-        /* Hero Section */
-        .hero {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 40px 0;
-            gap: 40px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 10;
-        }
-
-        h1 {
-            font-size: 3.75rem;
-            /* 60px */
-            line-height: 1.1;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
             color: var(--text-primary);
         }
 
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 48px;
+            padding: 72px 0 96px;
+        }
+
+        .kicker {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            line-height: 1.08;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
         .subtitle {
-            font-size: 1.25rem;
-            /* 20px */
+            font-size: 1.125rem;
             color: var(--text-secondary);
             margin-bottom: 40px;
-            font-weight: 400;
-            max-width: 480px;
+            max-width: 460px;
         }
 
         .button-group {
@@ -118,31 +117,32 @@
         }
 
         .btn {
-            padding: 12px 32px;
+            padding: 12px 28px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 15px;
             cursor: pointer;
             transition: all 0.2s;
             text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary {
-            background-color: #225699;
-            color: var(--button-text);
-            border: 1px solid #225699;
+            background-color: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
         }
 
         .btn-primary:hover {
-            background-color: #1a427a;
-            border-color: #1a427a;
+            background-color: var(--accent-dark);
+            border-color: var(--accent-dark);
             transform: translateY(-1px);
         }
 
         .btn-outline {
             background-color: transparent;
             color: var(--text-primary);
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border);
         }
 
         .btn-outline:hover {
@@ -151,33 +151,158 @@
             transform: translateY(-1px);
         }
 
-        /* Canvas Container */
         #canvas-container {
             width: 100%;
-            height: 600px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 480px;
         }
 
-        /* Mobile Responsive */
+        #canvas-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        /* Ventures */
+        .venture {
+            display: block;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-light);
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .venture:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .venture:hover .venture-title {
+            color: var(--accent);
+        }
+
+        .venture-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .venture-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        .venture-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .venture-status.live {
+            border-color: rgba(34, 86, 153, 0.3);
+            color: var(--accent);
+        }
+
+        .venture-title {
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            transition: color 0.2s;
+        }
+
+        .venture-desc {
+            margin-top: 8px;
+            color: var(--text-secondary);
+            max-width: 560px;
+        }
+
+        /* Approach */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .approach-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .approach-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .approach-num {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        /* Contact / Footer */
+        .contact h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .contact p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-light);
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Mobile */
         @media (max-width: 968px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 20px;
-                padding-top: 20px;
+                gap: 8px;
+                padding: 24px 0 64px;
             }
 
             .hero-content {
-                margin: 0 auto;
                 order: 2;
-                /* Content below globe on mobile if desired, or keep 1 */
+                margin: 0 auto;
             }
 
-            h1 {
-                font-size: 2.5rem;
+            .subtitle {
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .button-group {
@@ -185,8 +310,16 @@
             }
 
             #canvas-container {
-                height: 400px;
                 order: 1;
+                height: 320px;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 20px;
             }
         }
     </style>
@@ -195,299 +328,191 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo-container">
-                <!-- Using existing logo.svg -->
-                <img src="logo.svg" alt="CapiSys" class="logo">
-                <!-- <span>CapiSys</span> -->
-            </div>
-            <!-- <nav>
-                <a href="#about">About</a>
+            <a href="#"><img src="logo.svg" alt="CapiSys" class="logo"></a>
+            <nav>
+                <a href="#ventures">Ventures</a>
+                <a href="#approach">Approach</a>
                 <a href="#contact">Contact</a>
-            </nav> -->
+            </nav>
         </header>
 
-        <section class="hero">
+        <section class="hero" style="border-top:none; padding-top:48px;">
             <div class="hero-content">
-                <h1>From problems to ventures powered by adaptive intelligence</h1>
+                <div class="kicker">Adaptive Intelligence Ventures</div>
+                <h1>From problems to ventures, powered by adaptive intelligence.</h1>
                 <p class="subtitle">
-                    We harness AI and frontier technologies across the full lifecycle research, build, and
-                    launch creating new ventures
-                    and transforming existing businesses through intelligent modernization.
+                    CapiSys is a venture studio. We harness AI and frontier technologies across the full
+                    lifecycle&mdash;research, build, and launch&mdash;creating new ventures and modernizing
+                    existing businesses.
                 </p>
                 <div class="button-group">
-                    <a href="mailto:qa@capisys.com" class="btn btn-primary">Contact Us</a>
-                    <!-- <a href="#about" class="btn btn-outline">Learn More</a> -->
+                    <a href="#ventures" class="btn btn-primary">Our Ventures</a>
+                    <a href="mailto:qa@capisys.com" class="btn btn-outline">Contact Us</a>
                 </div>
             </div>
-
-            <div id="canvas-container"></div>
+            <div id="canvas-container" aria-hidden="true"></div>
         </section>
+
+        <section id="ventures">
+            <div class="section-label">Ventures</div>
+
+            <a class="venture" href="https://gohvy.com" target="_blank" rel="noopener">
+                <div class="venture-meta">
+                    <span class="venture-name">GOHVY</span>
+                    <span class="venture-status live">Live</span>
+                </div>
+                <div class="venture-title">High-intensity training, engineered for results.</div>
+                <p class="venture-desc">A Heavy Duty training app that automates progression and recovery&mdash;one
+                    set to absolute failure, three focused sessions a week, with AI coaching on the premium tier.</p>
+            </a>
+
+            <a class="venture" href="https://github.com/rickscode/Solara-Pro" target="_blank" rel="noopener">
+                <div class="venture-meta">
+                    <span class="venture-name">Solara Pro</span>
+                    <span class="venture-status">In development</span>
+                </div>
+                <div class="venture-title">AI agents for intelligent on-chain trading.</div>
+                <p class="venture-desc">An AI-powered Solana trading platform combining market intelligence,
+                    autonomous execution, and a security-first risk engine with real-time anti-rugpull analysis.</p>
+            </a>
+        </section>
+
+        <section id="approach">
+            <div class="section-label">Approach</div>
+            <div class="approach-grid">
+                <div class="approach-item">
+                    <div class="approach-num">01</div>
+                    <h3>Research</h3>
+                    <p>We start with real problems and study them until the opportunity is clear.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-num">02</div>
+                    <h3>Build</h3>
+                    <p>We design and engineer AI-first products fast, with production discipline.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-num">03</div>
+                    <h3>Launch</h3>
+                    <p>We take ventures to market and operate them toward sustainable revenue.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="section-label">Contact</div>
+            <h2>Have a problem worth building on?</h2>
+            <p>Whether it is a new venture idea or an existing business ready for intelligent modernization,
+                we would like to hear about it.</p>
+            <a href="mailto:qa@capisys.com" class="btn btn-primary">qa@capisys.com</a>
+        </section>
+
+        <footer>
+            <span>&copy; 2026 CapiSys</span>
+            <span>Adaptive Intelligence Ventures</span>
+        </footer>
     </div>
 
     <script>
-        // ============================================
-        // CONFIGURATION
-        // ============================================
-        const ANIMATION_CONFIG = {
-            cycleDuration: 3.0, // seconds per loop
-            phases: {
-                spread: { start: 0.0, end: 0.8, duration: 0.8 },
-                holdOpen: { start: 0.8, end: 1.2, duration: 0.4 },
-                reassemble: { start: 1.2, end: 2.0, duration: 0.8 },
-                holdClosed: { start: 2.0, end: 3.0, duration: 1.0 }
-            },
-            spacing: {
-                compact: 1.0,   // cubes touch perfectly (matches 1.0 cube size)
-                expanded: 3.5   // more spread for cleaner look
-            },
-            stagger: {
-                perUnit: 0.03   // seconds of delay per unit distance from center
+        (function () {
+            const CONFIG = {
+                count: 140,
+                cols: 14,
+                rows: 10,
+                cycle: 7,            // seconds per loop
+                assembleEnd: 0.32,   // fraction of cycle spent assembling
+                holdEnd: 0.5,        // hold the grid
+                releaseEnd: 0.85,    // fraction when release completes
+                accent: '34,86,153'
+            };
+
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
             }
-        };
 
-        // ============================================
-        // HELPER FUNCTIONS
-        // ============================================
-        function easeInOutCubic(t) {
-            return t < 0.5
-                ? 4 * t * t * t
-                : 1 - Math.pow(-2 * t + 2, 3) / 2;
-        }
+            const container = document.getElementById('canvas-container');
+            const canvas = document.createElement('canvas');
+            container.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
 
-        function getColorForPosition(x, y, z) {
-            // All cubes use dark blue
-            return new THREE.Color(0x225699);
-        }
+            let w = 0, h = 0, points = [];
 
-        // ============================================
-        // SETUP
-        // ============================================
-        function setupScene(container) {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
+            function reseed() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                w = container.clientWidth;
+                h = container.clientHeight;
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            // Scene
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xffffff); // White background
-
-            // Orthographic Camera for isometric view
-            const aspect = width / height;
-            const isMobile = width < 968;
-            const frustumSize = isMobile ? 10 : 7.5; // Smaller on mobile to fit in container
-            const camera = new THREE.OrthographicCamera(
-                frustumSize * aspect / -2,
-                frustumSize * aspect / 2,
-                frustumSize / 2,
-                frustumSize / -2,
-                0.1,
-                1000
-            );
-            camera.position.set(5, 4, 5); // Isometric angle
-            camera.lookAt(0, 0, 0);
-
-            // Renderer
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
-            container.appendChild(renderer.domElement);
-
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-            scene.add(ambientLight);
-
-            const keyLight = new THREE.DirectionalLight(0xffffff, 0.6);
-            keyLight.position.set(5, 8, 5);
-            scene.add(keyLight);
-
-            const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
-            fillLight.position.set(-5, -3, -5);
-            scene.add(fillLight);
-
-            return { scene, camera, renderer };
-        }
-
-        function createCubeGrid() {
-            const group = new THREE.Group();
-
-            // Single geometry for all cubes (performance optimization)
-            const geometry = new THREE.BoxGeometry(1.0, 1.0, 1.0);
-
-            // Create 2x2x2 grid (8 cubes total for cleaner animation)
-            for (let x = -0.5; x <= 0.5; x += 1) {
-                for (let y = -0.5; y <= 0.5; y += 1) {
-                    for (let z = -0.5; z <= 0.5; z += 1) {
-                        const color = getColorForPosition(x, y, z);
-                        const material = new THREE.MeshStandardMaterial({
-                            color: color,
-                            metalness: 0.3,
-                            roughness: 0.6
-                        });
-
-                        const cube = new THREE.Mesh(geometry, material);
-                        cube.position.set(
-                            x * ANIMATION_CONFIG.spacing.compact,
-                            y * ANIMATION_CONFIG.spacing.compact,
-                            z * ANIMATION_CONFIG.spacing.compact
-                        );
-
-                        // Store metadata for animation
-                        cube.userData = {
-                            gridPos: { x, y, z },
-                            targetPos: {
-                                compact: new THREE.Vector3(
-                                    x * ANIMATION_CONFIG.spacing.compact,
-                                    y * ANIMATION_CONFIG.spacing.compact,
-                                    z * ANIMATION_CONFIG.spacing.compact
-                                ),
-                                expanded: new THREE.Vector3(
-                                    x * ANIMATION_CONFIG.spacing.expanded,
-                                    y * ANIMATION_CONFIG.spacing.expanded,
-                                    z * ANIMATION_CONFIG.spacing.expanded
-                                )
-                            },
-                            // Stagger based on distance from center
-                            staggerDelay: Math.sqrt(x * x + y * y + z * z) * ANIMATION_CONFIG.stagger.perUnit
-                        };
-
-                        group.add(cube);
-                    }
+                points = [];
+                for (let i = 0; i < CONFIG.count; i++) {
+                    const gx = (i % CONFIG.cols) / (CONFIG.cols - 1);
+                    const gy = Math.floor(i / CONFIG.cols) / (CONFIG.rows - 1);
+                    // stagger by distance from grid center
+                    const dist = Math.hypot(gx - 0.5, gy - 0.5);
+                    points.push({
+                        rx: Math.random() * w,
+                        ry: Math.random() * h,
+                        gx: w * 0.12 + gx * w * 0.76,
+                        gy: h * 0.12 + gy * h * 0.76,
+                        ph: Math.random() * Math.PI * 2,
+                        stag: dist * 0.12
+                    });
                 }
             }
 
-            return group;
-        }
-
-        // ============================================
-        // ANIMATION
-        // ============================================
-        function updateCubeAnimation(cube, cycleTime, state) {
-            const { targetPos, staggerDelay } = cube.userData;
-            const config = ANIMATION_CONFIG;
-
-            // SPREAD PHASE - Open
-            if (cycleTime >= config.phases.spread.start &&
-                cycleTime < config.phases.spread.end) {
-
-                const phaseTime = cycleTime - config.phases.spread.start - staggerDelay;
-                const t = Math.max(0, Math.min(1, phaseTime / config.phases.spread.duration));
-                const eased = easeInOutCubic(t);
-
-                cube.position.lerpVectors(
-                    targetPos.compact,
-                    targetPos.expanded,
-                    eased
-                );
+            function phase(cycleT, p) {
+                // returns 0..1 blend toward grid for this point
+                const a0 = 0, a1 = CONFIG.assembleEnd;
+                const r0 = CONFIG.holdEnd, r1 = CONFIG.releaseEnd;
+                if (cycleT < a1) {
+                    const t = Math.max(0, Math.min(1, (cycleT - a0 - p.stag) / (a1 - a0 - p.stag)));
+                    return easeInOutCubic(t);
+                }
+                if (cycleT < r0) return 1;
+                if (cycleT < r1) {
+                    const t = Math.max(0, Math.min(1, (cycleT - r0 - p.stag) / (r1 - r0 - p.stag)));
+                    return 1 - easeInOutCubic(t);
+                }
+                return 0;
             }
 
-            // HOLD OPEN PHASE - Stay open
-            else if (cycleTime >= config.phases.holdOpen.start &&
-                cycleTime < config.phases.holdOpen.end) {
+            function frame(ms) {
+                const t = ms / 1000;
+                const cycleT = (t % CONFIG.cycle) / CONFIG.cycle;
+                ctx.clearRect(0, 0, w, h);
 
-                cube.position.copy(targetPos.expanded);
+                for (const p of points) {
+                    const k = phase(cycleT, p);
+                    const jx = Math.sin(t * 0.7 + p.ph) * 5 * (1 - k);
+                    const jy = Math.cos(t * 0.6 + p.ph) * 5 * (1 - k);
+                    const x = p.rx + (p.gx - p.rx) * k + jx;
+                    const y = p.ry + (p.gy - p.ry) * k + jy;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 1.8 + k * 0.8, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(' + CONFIG.accent + ',' + (0.35 + k * 0.5) + ')';
+                    ctx.fill();
+                }
+                requestAnimationFrame(frame);
             }
 
-            // REASSEMBLE PHASE - Close
-            else if (cycleTime >= config.phases.reassemble.start &&
-                cycleTime < config.phases.reassemble.end) {
-
-                const phaseTime = cycleTime - config.phases.reassemble.start - staggerDelay;
-                const t = Math.max(0, Math.min(1, phaseTime / config.phases.reassemble.duration));
-                const eased = easeInOutCubic(t);
-
-                cube.position.lerpVectors(
-                    targetPos.expanded,
-                    targetPos.compact,
-                    eased
-                );
+            function start() {
+                if (container.clientWidth === 0) {
+                    requestAnimationFrame(start);
+                    return;
+                }
+                reseed();
+                requestAnimationFrame(frame);
             }
 
-            // HOLD CLOSED PHASE - Stay closed
-            else {
-                cube.position.copy(targetPos.compact);
-                cube.rotation.set(0, 0, 0);
-            }
-        }
-
-        function animate(scene, camera, renderer, cubesGroup, state) {
-            const clock = new THREE.Clock();
-
-            function loop() {
-                const deltaTime = clock.getDelta();
-                state.time += deltaTime;
-
-                // Loop time within cycle
-                const cycleTime = state.time % state.cycleDuration;
-
-                // Update each cube based on current phase
-                cubesGroup.children.forEach(cube => {
-                    if (cube.type === 'Mesh') {
-                        updateCubeAnimation(cube, cycleTime, state);
-                    }
-                });
-
-                renderer.render(scene, camera);
-                requestAnimationFrame(loop);
-            }
-
-            loop();
-        }
-
-        // ============================================
-        // RESPONSIVE
-        // ============================================
-        function handleResize(container, camera, renderer) {
-            window.addEventListener('resize', () => {
-                const width = container.clientWidth;
-                const height = container.clientHeight;
-                const aspect = width / height;
-
-                // Update orthographic camera frustum
-                const isMobile = width < 968;
-                const frustumSize = isMobile ? 10 : 7.5;
-                camera.left = frustumSize * aspect / -2;
-                camera.right = frustumSize * aspect / 2;
-                camera.top = frustumSize / 2;
-                camera.bottom = frustumSize / -2;
-                camera.updateProjectionMatrix();
-
-                renderer.setSize(width, height);
+            let resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(reseed, 150);
             });
-        }
 
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        function initCubeAnimation() {
-            console.log('Initializing cube animation...');
-            const container = document.getElementById('canvas-container');
-            console.log('Container:', container);
-
-            if (!container) {
-                console.error('Canvas container not found!');
-                return;
-            }
-
-            const { scene, camera, renderer } = setupScene(container);
-            console.log('Scene setup complete');
-
-            const cubesGroup = createCubeGrid();
-            console.log('Cubes created:', cubesGroup.children.length);
-            scene.add(cubesGroup);
-
-            const animationState = {
-                time: 0,
-                cycleDuration: ANIMATION_CONFIG.cycleDuration
-            };
-
-            animate(scene, camera, renderer, cubesGroup, animationState);
-            handleResize(container, camera, renderer);
-            console.log('Animation started');
-        }
-
-        // ============================================
-        // START
-        // ============================================
-        document.addEventListener('DOMContentLoaded', initCubeAnimation);
+            start();
+        })();
     </script>
 </body>
 
